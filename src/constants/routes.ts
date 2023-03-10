@@ -1,5 +1,7 @@
-const REACT_ROUTES = {
-  INDEX: "/",
+const PATHS = {
+  STUDENTS: "/",
+  STUDENT_PROFILE: "/student-profile/:id",
+  INVALID: "/invalid",
 };
 
-export default REACT_ROUTES;
+export default PATHS;
