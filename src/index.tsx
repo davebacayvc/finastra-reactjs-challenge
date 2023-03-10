@@ -12,9 +12,13 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        {REACT_ROUTES.map((REACT_ROUTE) => {
+        {REACT_ROUTES.map((REACT_ROUTE, index) => {
           return (
-            <Route path={REACT_ROUTE.PATH} element={REACT_ROUTE.ELEMENT} />
+            <Route
+              path={REACT_ROUTE.PATH}
+              element={REACT_ROUTE.ELEMENT}
+              key={index}
+            />
           );
         })}
       </Routes>
