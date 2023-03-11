@@ -11,6 +11,7 @@ export const PROJECT_DESCRIPTION = {
 };
 
 export const DEFAULT_USER_IMAGE = "/assets/default.jpg";
+export const EXCHANGE_RATE_API_KEY = "02b499be3b4fb4c6bf93e9ed";
 
 export const REACT_ROUTES: ReactRoutesType[] = [
   {

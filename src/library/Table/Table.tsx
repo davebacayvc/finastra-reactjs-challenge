@@ -10,6 +10,10 @@ export type ColsType = {
   id: string;
   sort?: boolean;
   link?: boolean;
+  dropdownConfig?: {
+    visible: boolean;
+    content: React.ReactNode;
+  };
 };
 export type RowsType = any[];
 export type TableProps = {
@@ -96,9 +100,14 @@ const Table: React.FC<TableProps> = (props) => {
               return (
                 <th
                   key={index}
-                  onClick={() => sortByKey(col.id)}
-                  className={`${col.sort ? "sort" : ""}`}
+                  onClick={() => (col.sort ? sortByKey(col.id) : null)}
+                  className={`th-head ${col.sort ? "sort" : ""}`}
                 >
+                  {col.dropdownConfig?.visible ? (
+                    <div className="dropdown-content">
+                      {col.dropdownConfig.content}
+                    </div>
+                  ) : null}
                   <span>{col.label}</span>
                   {col.sort
                     ? sorted.sorted === col.id

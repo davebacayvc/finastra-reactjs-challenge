@@ -4,6 +4,8 @@ const ENDPOINTS = {
   PROFILE: "https://run.mocky.io/v3/214aef9d-b18a-4188-b55f-a25046408a7e",
   CURRENCY_TYPE:
     "https://gist.githubusercontent.com/JCGonzaga01/9f93162c5fb799b7c084bb28fc69a2f1/raw/94c55f89dc4c1e2e7ca49de5658c3441a2b348af/Updated-Common-Currency.json",
+  EXCHANGE_RATE:
+    "https://v6.exchangerate-api.com/v6/:apiKey/pair/:base/:target",
 };
 
 export default ENDPOINTS;

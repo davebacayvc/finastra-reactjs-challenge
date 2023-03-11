@@ -65,5 +65,45 @@
         opacity: 0.7;
       }
     }
+    .th-head {
+      position: relative;
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 0px 0;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        left: 0;
+        height: 200px;
+        text-align: left;
+        overflow: auto;
+
+        .link {
+          font-size: 1.2rem;
+          margin: 0.3rem 0;
+          padding-left: 5px;
+          display: block;
+          border: none;
+          background-color: transparent;
+          text-align: left;
+          color: #fff;
+          border-bottom: 1px dotted #fff;
+          width: 100%;
+
+          &:hover {
+            opacity: 0.5;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &:hover .dropdown-content {
+        display: block;
+      }
+    }
   }
 }

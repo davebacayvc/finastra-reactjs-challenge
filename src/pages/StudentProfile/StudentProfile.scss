@@ -10,6 +10,7 @@
       }
       .wrapper-captions {
         padding: 0 3rem;
+        width: 100%;
         h2 {
           font-size: 5rem;
           font-weight: 900;
@@ -30,6 +31,15 @@
             span {
               font-size: 1.6rem;
             }
+          }
+        }
+
+        .course-table-container {
+          margin-top: 3rem;
+          h3 {
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
           }
         }
       }
