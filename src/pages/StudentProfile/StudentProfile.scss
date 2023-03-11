@@ -1,0 +1,26 @@
+.student-profile-container {
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    background-color: #2196f3;
+    padding: 10px;
+
+    .item1 {
+      grid-column-start: 1;
+      grid-column-end: 1;
+    }
+
+    .item2 {
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+  }
+
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+}

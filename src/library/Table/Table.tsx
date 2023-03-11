@@ -1,11 +1,12 @@
 import React from "react";
 import "./Table.scss";
 
-type ColsType = {
+export type ColsType = {
   label: string;
   id: string;
 };
-type TableProps = {
+export type RowsType = any[];
+export type TableProps = {
   cols?: ColsType[];
   rows?: any[];
 };
@@ -13,26 +14,26 @@ type TableProps = {
 const Table: React.FC<TableProps> = (props) => {
   return (
     <table className="table-container">
-      <tr>
-        {props.cols?.map((col) => {
-          return <th>{col.label}</th>;
-        })}
-      </tr>
-      {props.rows?.map((row) => (
+      <thead>
         <tr>
-          {props.cols?.map((col) => {
-            return (
-              <td>
-                {col.id === "image" ? (
-                  <img src={row[col.id]} alt="student-pic" />
-                ) : (
-                  <span>{row[col.id]}</span>
-                )}
-              </td>
-            );
+          {props.cols?.map((col, index) => {
+            return <th key={index}>{col.label}</th>;
           })}
         </tr>
-      ))}
+      </thead>
+      <tbody>
+        {props.rows?.map((row, index) => (
+          <tr key={index}>
+            {props.cols?.map((col, index) => {
+              return (
+                <td key={index}>
+                  <span>{row[col.id]}</span>
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };

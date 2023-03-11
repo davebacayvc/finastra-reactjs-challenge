@@ -1,65 +1,159 @@
 import React from "react";
-import { PROJECT_DESCRIPTION } from "../../constants/constants";
+import {
+  DEFAULT_USER_IMAGE,
+  PROJECT_DESCRIPTION,
+} from "../../constants/constants";
+import useFetchStudentCourses from "../../hooks/useFetchStudentCourses";
+import useFetchStudentProfile from "../../hooks/useFetchStudentProfile";
+import useFetchStudents from "../../hooks/useFetchStudents";
 import Banner from "../../library/Banner/Banner";
 import Container from "../../library/Container/Container";
-import Table from "../../library/Table/Table";
+import Table, { ColsType, RowsType } from "../../library/Table/Table";
+import Wrapper from "../../library/Wrapper/Wrapper";
 import "./Students.scss";
 
-const Students: React.FC = () => {
-  const tableDefs = {
-    columns: [
-      {
-        id: "image",
-        label: "",
-      },
-      {
-        id: "name",
-        label: "Name",
-      },
-      {
-        id: "phone",
-        label: "Phone",
-      },
-      {
-        id: "email",
-        label: "Email",
-      },
-      {
-        id: "major",
-        label: "Major",
-      },
-      {
-        id: "status",
-        label: "Status",
-      },
-      {
-        id: "totalCourse",
-        label: "Total Course",
-      },
-    ],
+type TableDefsType = {
+  cols: ColsType[];
+  rows: any[];
+};
+enum StatusEnums {
+  Withdrawn = "Withdrawn",
+  Good = "Good",
+  Probation = "Probation",
+  Inactive = "Inactive",
+}
 
-    rows: [0, 1, 2, 3, 4, 5, 6, 7, 8].map((contact: any) => {
-      return {
-        image: "/assets/default.jpg",
-        name: "Maria Anders",
-        phone: "123-456-789",
-        email: "dave@testdata.co",
-        major: "Computer Science",
-        status: "Good",
-        totalCourse: "4",
-      };
-    }),
-  };
-  return (
-    <div>
-      <Container>
-        <Banner
-          title={PROJECT_DESCRIPTION.TITLE}
-          description={PROJECT_DESCRIPTION.DESCRIPTION}
+const getStudentStatus = (type: number) => {
+  let displayedType: string;
+  switch (type) {
+    case 1:
+      displayedType = StatusEnums.Good;
+      break;
+    case 2:
+      displayedType = StatusEnums.Probation;
+      break;
+    case 3:
+      displayedType = StatusEnums.Inactive;
+      break;
+    default:
+      displayedType = StatusEnums.Withdrawn;
+  }
+
+  return displayedType;
+};
+
+const Students: React.FC = () => {
+  const { students, loading } = useFetchStudents();
+  const { studentProfile } = useFetchStudentProfile();
+  const { studentCourses } = useFetchStudentCourses();
+
+  const studentData = students.map((t1) => {
+    const userId = `user_${t1.id}`;
+    const filteredData = {
+      ...t1,
+      ...studentProfile.find((t2) => t2.user_id === userId),
+    };
+
+    const filteredCourses = studentCourses
+      ?.filter((course) => course.user_id === userId)
+      .map((data) => data);
+
+    return {
+      name: filteredData.name,
+      image: filteredData.user_img,
+      nickname: filteredData.nickname,
+      phone: filteredData.phone,
+      email: filteredData.email,
+      user_id: filteredData.user_id,
+      major: filteredData.major,
+      year: filteredData.year,
+      status: filteredData.status,
+      totalCourse: filteredCourses,
+    };
+  });
+
+  const cols: ColsType[] = [
+    {
+      /** !! Remove in refactor */ id: "id",
+      label: "ID",
+    },
+    {
+      id: "image",
+      label: "",
+    },
+    {
+      id: "name",
+      label: "Name",
+    },
+    {
+      id: "phone",
+      label: "Phone",
+    },
+    {
+      id: "email",
+      label: "Email",
+    },
+    {
+      id: "major",
+      label: "Major",
+    },
+    {
+      id: "status",
+      label: "Status",
+    },
+    {
+      id: "totalCourse",
+      label: "Total Course",
+    },
+  ];
+
+  const rows: RowsType = studentData?.map((student) => {
+    const status = student.status?.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
+    const getStudentType = () => {
+      if (status?.length ?? 0 > 0) {
+        return getStudentStatus(status![0].type);
+      }
+
+      return getStudentStatus(0);
+    };
+
+    return {
+      id: student.user_id,
+      image: (
+        <img
+          src={student.image ? `/assets/${student.image}` : DEFAULT_USER_IMAGE}
+          alt="student-pic"
         />
-        <Table cols={tableDefs.columns} rows={tableDefs.rows} />
-      </Container>
-    </div>
+      ),
+      name: `${student.name} ${
+        student.nickname ? `(${student.nickname})` : ""
+      }`,
+      phone: student.phone,
+      email: student.email,
+      major: student.major,
+      status: getStudentType(),
+      totalCourse: student.totalCourse.length,
+    };
+  });
+
+  const tableDefs: TableDefsType = {
+    cols,
+    rows,
+  };
+
+  return (
+    <Container>
+      <Banner
+        title={PROJECT_DESCRIPTION.TITLE}
+        description={PROJECT_DESCRIPTION.DESCRIPTION}
+      />
+      <Wrapper loading={loading}>
+        <Table cols={tableDefs.cols} rows={tableDefs.rows} />
+      </Wrapper>
+    </Container>
   );
 };
 
