@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ENDPOINTS from "../constants/endpoints";
 
-type StudentCoursesType = {
+export type StudentCoursesType = {
   id: number;
   user_id: string;
   course_name: string;

@@ -6,7 +6,7 @@ type StatusType = {
   date: Date;
   type: number;
 };
-type StudentProfile = {
+export type StudentProfileType = {
   id: number;
   user_id: string;
   user_img: string;
@@ -15,7 +15,9 @@ type StudentProfile = {
   status: StatusType[];
 };
 const useFetchStudentProfile = () => {
-  const [studentProfile, setStudentProfile] = useState<StudentProfile[]>([]);
+  const [studentProfile, setStudentProfile] = useState<StudentProfileType[]>(
+    []
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

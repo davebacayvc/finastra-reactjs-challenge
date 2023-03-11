@@ -1,26 +1,38 @@
 .student-profile-container {
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
-    background-color: #2196f3;
-    padding: 10px;
+  .profile-wrapper {
+    .user-summary {
+      display: flex;
+      align-items: center;
+      .wrapper-holder {
+        img {
+          width: 100%;
+        }
+      }
+      .wrapper-captions {
+        padding: 0 3rem;
+        h2 {
+          font-size: 5rem;
+          font-weight: 900;
+          margin-bottom: 1rem;
+        }
+        ul {
+          list-style: none;
 
-    .item1 {
-      grid-column-start: 1;
-      grid-column-end: 1;
+          li {
+            margin-bottom: 0.7rem;
+
+            svg {
+              margin-right: 1rem;
+              path {
+                color: gray;
+              }
+            }
+            span {
+              font-size: 1.6rem;
+            }
+          }
+        }
+      }
     }
-
-    .item2 {
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
-  }
-
-  .grid-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 20px 0;
-    font-size: 30px;
   }
 }

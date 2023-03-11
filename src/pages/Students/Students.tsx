@@ -1,13 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import {
   DEFAULT_USER_IMAGE,
   PROJECT_DESCRIPTION,
 } from "../../constants/constants";
-import PATHS from "../../constants/routes";
-import useFetchStudentCourses from "../../hooks/useFetchStudentCourses";
-import useFetchStudentProfile from "../../hooks/useFetchStudentProfile";
-import useFetchStudents from "../../hooks/useFetchStudents";
+import useStudentInformation from "../../hooks/useStudentInformation";
 import Banner from "../../library/Banner/Banner";
 import Container from "../../library/Container/Container";
 import Table, { ColsType, RowsType } from "../../library/Table/Table";
@@ -45,44 +41,7 @@ const getStudentStatus = (type: number) => {
 };
 
 const Students: React.FC = () => {
-  const { students, loading } = useFetchStudents();
-  const { studentProfile } = useFetchStudentProfile();
-  const { studentCourses } = useFetchStudentCourses();
-  const navigate = useNavigate();
-
-  const studentData = students.map((t1) => {
-    const userId = `user_${t1.id}`;
-    const filteredData = {
-      ...t1,
-      ...studentProfile.find((t2) => t2.user_id === userId),
-    };
-
-    const filteredCourses = studentCourses
-      ?.filter((course) => course.user_id === userId)
-      .map((data) => data)
-      .filter(
-        (value, index, self) =>
-          index ===
-          self.findIndex(
-            (t) =>
-              t.course_name === value.course_name ||
-              t.semester_code === value.semester_code
-          )
-      );
-
-    return {
-      name: filteredData.name,
-      image: filteredData.user_img,
-      nickname: filteredData.nickname,
-      phone: filteredData.phone,
-      email: filteredData.email,
-      user_id: filteredData.user_id,
-      major: filteredData.major,
-      year: filteredData.year,
-      status: filteredData.status,
-      totalCourse: filteredCourses,
-    };
-  });
+  const { studentData, loading } = useStudentInformation();
 
   const cols: ColsType[] = [
     {

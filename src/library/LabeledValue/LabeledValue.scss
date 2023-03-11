@@ -1,0 +1,22 @@
+.labeled-value {
+  margin-bottom: 1rem;
+  .label {
+    margin-right: 1rem;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+  .value {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  svg {
+    position: relative;
+    top: 2px;
+    margin-right: 0.7rem;
+
+    path {
+      color: #333;
+    }
+  }
+}

@@ -15,6 +15,7 @@ export type RowsType = any[];
 export type TableProps = {
   cols?: ColsType[];
   rows?: any[];
+  hasSearch?: boolean;
 };
 
 const Table: React.FC<TableProps> = (props) => {
@@ -80,12 +81,14 @@ const Table: React.FC<TableProps> = (props) => {
 
   return (
     <div className="table-container">
-      <input
-        type="text"
-        onChange={searchHandler}
-        value={searchPhrase}
-        placeholder="Click here to search any data ..."
-      />
+      {props.hasSearch ? (
+        <input
+          type="text"
+          onChange={searchHandler}
+          value={searchPhrase}
+          placeholder="Click here to search any data ..."
+        />
+      ) : null}
       <table>
         <thead>
           <tr>
@@ -141,6 +144,10 @@ const Table: React.FC<TableProps> = (props) => {
       </table>
     </div>
   );
+};
+
+Table.defaultProps = {
+  hasSearch: true,
 };
 
 export default Table;

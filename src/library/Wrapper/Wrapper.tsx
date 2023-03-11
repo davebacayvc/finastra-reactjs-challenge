@@ -6,13 +6,18 @@ type WrapperProps = {
   loading?: boolean;
   error?: boolean;
   children: React.ReactNode;
+  className?: string;
 };
 
 const Wrapper: React.FC<WrapperProps> = (props) => {
   if (props.loading) {
     return <Spinner isVisible={true} />;
   }
-  return <div className="wrapper">{props.children}</div>;
+  return (
+    <div className={`"wrapper" ${props.className ? props.className : ""}`}>
+      {props.children}
+    </div>
+  );
 };
 
 Wrapper.defaultProps = {
