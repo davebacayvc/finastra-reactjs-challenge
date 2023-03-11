@@ -40,3 +40,11 @@ Try running the command above, and try installing again
 - Currency is dynamic. It can be change by picking a currency type.
 
 ![Info Screenshot](https://res.cloudinary.com/dv6kvjoed/image/upload/v1678547587/profile_fc15ra.png)
+
+### Landing Page Video Recording
+
+![Video](https://res.cloudinary.com/dv6kvjoed/image/upload/v1678547866/sort_llguct.gif)
+
+### Student Information Page Video Recording
+
+![Video](https://res.cloudinary.com/dv6kvjoed/image/upload/v1678547970/profile_cgdokd.gif)
