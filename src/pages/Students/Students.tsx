@@ -84,6 +84,7 @@ const Students: React.FC = () => {
     {
       id: "name",
       label: "Name",
+      sort: true,
     },
     {
       id: "phone",
@@ -96,10 +97,12 @@ const Students: React.FC = () => {
     {
       id: "major",
       label: "Major",
+      sort: true,
     },
     {
       id: "status",
       label: "Status",
+      sort: true,
     },
     {
       id: "totalCourse",
@@ -135,7 +138,7 @@ const Students: React.FC = () => {
       email: student.email,
       major: student.major,
       status: getStudentType(),
-      totalCourse: student.totalCourse.length,
+      totalCourse: student.totalCourse.length.toString(),
     };
   });
 
