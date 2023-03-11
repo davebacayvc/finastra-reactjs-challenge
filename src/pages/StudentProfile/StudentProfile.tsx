@@ -38,6 +38,7 @@ const StudentProfile: React.FC = () => {
   const { studentData, loading: studentDataLoading } = useStudentInformation();
   const { studentCourses, loading: coursesLoading } = useFetchStudentCourses();
   const loading = studentDataLoading || coursesLoading;
+  const [error, setError] = useState(false);
 
   /** Find the student by using find method and filtered by user_id */
   const filteredStudentData = studentData?.filter(
@@ -89,6 +90,7 @@ const StudentProfile: React.FC = () => {
       .catch((error) => {
         setChangeCurrencyLoading(false);
         console.log(error);
+        setError(true);
       });
   }, [currencyConfigs]);
 
@@ -205,15 +207,13 @@ const StudentProfile: React.FC = () => {
               />
               <div className="course-table-container">
                 <h3>Student Courses ({rows?.length})</h3>
-                {changeCurrencyLoading ? (
-                  <Spinner isVisible={true} />
-                ) : (
+                <Wrapper error={error} loading={changeCurrencyLoading}>
                   <Table
                     hasSearch={false}
                     cols={tableDefs.cols}
                     rows={tableDefs.rows}
                   />
-                )}
+                </Wrapper>
               </div>
             </div>
           </div>

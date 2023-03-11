@@ -108,7 +108,14 @@ const Table: React.FC<TableProps> = (props) => {
                       {col.dropdownConfig.content}
                     </div>
                   ) : null}
-                  <span>{col.label}</span>
+                  <span>
+                    {col.label}{" "}
+                    {col.dropdownConfig?.visible ? (
+                      <span className="hover-instruction">
+                        Hover to show dropdown
+                      </span>
+                    ) : null}
+                  </span>
                   {col.sort
                     ? sorted.sorted === col.id
                       ? renderArrow(col.id)

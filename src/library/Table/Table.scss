@@ -68,6 +68,12 @@
     .th-head {
       position: relative;
 
+      .hover-instruction {
+        font-size: 1.2rem;
+        border-bottom: 1px dotted #fff;
+        color: #fff;
+      }
+
       .dropdown-content {
         display: none;
         position: absolute;
