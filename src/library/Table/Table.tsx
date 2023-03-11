@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSortAmountDownAlt, FaSortAmountUpAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import PATHS from "../../constants/routes";
 import NoInformationToDisplay from "../NoInformationToDisplay/NoInformationToDisplay";
 import "./Table.scss";
 
@@ -7,6 +9,7 @@ export type ColsType = {
   label: string;
   id: string;
   sort?: boolean;
+  link?: boolean;
 };
 export type RowsType = any[];
 export type TableProps = {
@@ -18,6 +21,7 @@ const Table: React.FC<TableProps> = (props) => {
   const [rows, setRows] = useState<RowsType[]>([]);
   const [sorted, setSorted] = useState({ sorted: "id", reversed: false });
   const [searchPhrase, setSearchPhrase] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setRows(props.rows ?? []);
@@ -111,17 +115,27 @@ const Table: React.FC<TableProps> = (props) => {
               </td>
             </tr>
           ) : (
-            rows?.map((row, index) => (
-              <tr key={index}>
-                {props.cols?.map((col: any, index) => {
-                  return (
-                    <td key={index}>
-                      <span>{row[col.id]}</span>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))
+            rows?.map((row: any, index) => {
+              const userId = row.id;
+              return (
+                <tr key={index}>
+                  {props.cols?.map((col: any, index) => {
+                    const onClick = () =>
+                      navigate(PATHS.STUDENT_PROFILE.replace(":id", userId));
+
+                    const tdProps = {
+                      onClick,
+                      className: "link",
+                    };
+                    return (
+                      <td key={index} {...{ ...(col.link ? tdProps : null) }}>
+                        <span>{row[col.id]}</span>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>

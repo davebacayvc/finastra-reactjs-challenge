@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   DEFAULT_USER_IMAGE,
   PROJECT_DESCRIPTION,
 } from "../../constants/constants";
+import PATHS from "../../constants/routes";
 import useFetchStudentCourses from "../../hooks/useFetchStudentCourses";
 import useFetchStudentProfile from "../../hooks/useFetchStudentProfile";
 import useFetchStudents from "../../hooks/useFetchStudents";
@@ -46,6 +48,7 @@ const Students: React.FC = () => {
   const { students, loading } = useFetchStudents();
   const { studentProfile } = useFetchStudentProfile();
   const { studentCourses } = useFetchStudentCourses();
+  const navigate = useNavigate();
 
   const studentData = students.map((t1) => {
     const userId = `user_${t1.id}`;
@@ -83,10 +86,6 @@ const Students: React.FC = () => {
 
   const cols: ColsType[] = [
     {
-      /** !! Remove in refactor */ id: "id",
-      label: "ID",
-    },
-    {
       id: "image",
       label: "",
     },
@@ -94,6 +93,7 @@ const Students: React.FC = () => {
       id: "name",
       label: "Name",
       sort: true,
+      link: true,
     },
     {
       id: "phone",
