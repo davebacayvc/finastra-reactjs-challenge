@@ -1,5 +1,3 @@
-import React from "react";
-
 export enum StatusEnums {
   Withdrawn = "Withdrawn",
   Good = "Good",

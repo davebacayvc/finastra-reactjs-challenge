@@ -19,7 +19,6 @@ import useFetchStudentCourses from "../../hooks/useFetchStudentCourses";
 import useGetCurrency from "../../hooks/useGetCurrency";
 import axios from "axios";
 import ENDPOINTS from "../../constants/endpoints";
-import Spinner from "../../library/Spinner/Spinner";
 import moneyFormat from "../../helpers/moneyFormat";
 
 type CurrencyConfigTypes = {
@@ -169,7 +168,10 @@ const StudentProfile: React.FC = () => {
   };
 
   return (
-    <div className="student-profile-container">
+    <Wrapper
+      className="student-profile-container"
+      error={!student?.major && !loading}
+    >
       <Container>
         <Banner
           title={PROJECT_DESCRIPTION.TITLE}
@@ -219,7 +221,7 @@ const StudentProfile: React.FC = () => {
           </div>
         </Wrapper>
       </Container>
-    </div>
+    </Wrapper>
   );
 };
 

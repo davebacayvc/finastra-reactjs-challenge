@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import PATHS from "../../constants/routes";
 import Spinner from "../Spinner/Spinner";
 import "./Wrapper.scss";
 
@@ -14,7 +16,13 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
     return <Spinner isVisible={true} />;
   }
   if (props.error) {
-    return <p>Error occured. Please try again later.</p>;
+    return (
+      <div className="erorr-404-container">
+        <h1>INVALID</h1>
+        <p>Error Occured</p>
+        <Link to={PATHS.STUDENTS}>Go back to the home page</Link>
+      </div>
+    );
   }
   return (
     <div className={`"wrapper" ${props.className ? props.className : ""}`}>
