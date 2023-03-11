@@ -56,7 +56,16 @@ const Students: React.FC = () => {
 
     const filteredCourses = studentCourses
       ?.filter((course) => course.user_id === userId)
-      .map((data) => data);
+      .map((data) => data)
+      .filter(
+        (value, index, self) =>
+          index ===
+          self.findIndex(
+            (t) =>
+              t.course_name === value.course_name ||
+              t.semester_code === value.semester_code
+          )
+      );
 
     return {
       name: filteredData.name,
