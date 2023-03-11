@@ -4,8 +4,9 @@
 
 - No data component if there's no data
 - Display all student information
-- Fuzzy Search
+- Search function
 - Sort Data
+- Sorting while using search
 - Developed a reusable table for `Student Page` and `Profile Page`
 - Display all currencies available `Currency Type API`
 - Student Table Page

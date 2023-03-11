@@ -50,8 +50,8 @@ const Table: React.FC<TableProps> = (props) => {
   };
 
   const sortByKey = (key: string) => {
-    const copiedRows = [...(props.rows ?? [])];
-    copiedRows.sort((rowA, rowB) => {
+    const copiedRows = [...(rows ?? [])];
+    copiedRows.sort((rowA: any, rowB: any) => {
       const keyA: string = `${rowA[key]}`;
       const keyB: string = `${rowB[key]}`;
       if (sorted.reversed) {
